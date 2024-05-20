@@ -1,7 +1,5 @@
-<div
-    *ngFor="let pokemonInformation of pokemonList"
->{{pokemonInformation.nombre}}</div>
 <svl-pokemon-card
-    *ngFor="let pokemonInformation of pokemonList"
+    
+    *ngFor="let pokemonInformation of pokemonList; let i = index; trackBy: identify"
     [pokemonInformation]="pokemonInformation"
 ></svl-pokemon-card>

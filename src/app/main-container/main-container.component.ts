@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { PokemonService } from '../pokemon.service';
@@ -11,20 +11,28 @@ import { stat } from 'fs';
   standalone: true,
   imports: [PokemonCardComponent, CommonModule],
   templateUrl: './main-container.component.html',
-  styleUrl: './main-container.component.css'
+  styleUrl: './main-container.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainContainerComponent implements OnInit{
+export class MainContainerComponent implements OnInit, OnChanges{
   #pokemonService = inject(PokemonService);
-  #paginationSize: number = 20;
-  currentOffSet: number = 0;
+
   pokemonList: any[] = []; 
   pokemonShowList: Pokemon[] = [];
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.fetchData();
+  }
+
+  ngOnChanges() { 
+    this.cdr.detectChanges();
+  }
+
+  identify(index: any, item: any){
+    return item.nombre; 
   }
 
   fetchData() {
@@ -72,6 +80,8 @@ export class MainContainerComponent implements OnInit{
               e.atkEsp = stats[3].base_stat;
               e.defEsp = stats[4].base_stat;
               e.vel = stats[5].base_stat;
+
+              return e;
             }
           );
         })
