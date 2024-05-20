@@ -64,12 +64,17 @@ export class MainContainerComponent implements OnInit, OnChanges{
 
               //Getting img of form
               let forms: any[] = (data as any).forms;
-              e.img = forms[0].url;
+              this.#pokemonService.getEndPoint(forms[0].url).subscribe(
+                (data) => {
+                  let sprites = (data as any).sprites;
+                  e.img = sprites.front_default;
+                }
+              );
 
               //Getting types of pokemon
               let types: any[] = (data as any).types;
               types.map((t) => {
-                e.tipo.push(t.type.name);
+                e.tipo.push((t.type.name + " "));
               });
 
               //Getting stats of pokemon
