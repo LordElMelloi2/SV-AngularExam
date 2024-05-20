@@ -1,1 +1,7 @@
-<p>main-container works!</p>
+<div
+    *ngFor="let pokemonInformation of pokemonList"
+>{{pokemonInformation.nombre}}</div>
+<svl-pokemon-card
+    *ngFor="let pokemonInformation of pokemonList"
+    [pokemonInformation]="pokemonInformation"
+></svl-pokemon-card>

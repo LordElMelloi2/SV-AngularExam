@@ -89,9 +89,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/boostrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/boostrap.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js"
+            ]
           }
         }
       }

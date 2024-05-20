@@ -10,7 +10,15 @@ export class PokemonService {
 
   constructor(private http: HttpClient) { }
 
+  getEndPoint(endpoint: string){
+    return this.http.get(endpoint);
+  }
+
   getPokemonFromTo(from: number, to: number){
     return this.http.get(`${this.#endPoint}?offset=${from}&limit=${to}`);
+  }
+
+  getPokemonById(id: number) {
+    return this.http.get(`${this.#endPoint}/${id}`);
   }
 }

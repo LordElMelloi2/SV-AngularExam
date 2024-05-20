@@ -1,0 +1,24 @@
+<div class="pokemon-card">
+    <img [src]="pokemonInformation.img" alt="{{pokemonInformation.nombre}}">
+    <h2>{{pokemonInformation.nombre}}</h2>
+    <p>Types: <span *ngFor="let type of pokemonInformation.tipo">{{type}}</span></p>
+    <table>
+      <tr>
+        <th>HP</th>
+        <th>Attack</th>
+        <th>Defense</th>
+        <th>Sp. Attack</th>
+        <th>Sp. Defense</th>
+        <th>Speed</th>
+      </tr>
+      <tr>
+        <td>{{pokemonInformation.hp}}</td>
+        <td>{{pokemonInformation.atk}}</td>
+        <td>{{pokemonInformation.def}}</td>
+        <td>{{pokemonInformation.atkEsp}}</td>
+        <td>{{pokemonInformation.defEsp}}</td>
+        <td>{{pokemonInformation.vel}}</td>
+      </tr>
+    </table>
+    <a href="{{pokemonInformation.url}}" target="_blank">View on Pokédex</a>
+  </div>
