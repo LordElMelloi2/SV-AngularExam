@@ -3,6 +3,7 @@
     *ngFor="let pokemonInformation of pokemonList; let i = index; trackBy: identify"
     [pokemonInformation]="pokemonInformation"
     ></svl-pokemon-card>
-    <button>Anteriores</button>
-    <button>Siguientes</button>
+    <button (click)="updateToPrevPokemonOffset()">Anteriores</button>
+    <section>{{pokemonListOffset}}</section>
+    <button (click)="updateToNextPokemonOffset()">Siguientes</button>
 </div>

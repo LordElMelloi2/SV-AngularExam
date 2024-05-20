@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 import { PokemonService } from '../pokemon.service';
 import { Pokemon } from '../pokemon';
-import { url } from 'inspector';
-import { stat } from 'fs';
 
 @Component({
   selector: 'svl-main-container',
@@ -16,12 +14,10 @@ import { stat } from 'fs';
 })
 export class MainContainerComponent implements OnInit, OnChanges{
   #pokemonService = inject(PokemonService);
-
   pokemonList: any[] = []; 
-  pokemonShowList: Pokemon[] = [];
+  pokemonListOffset: number = 0;
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -35,10 +31,20 @@ export class MainContainerComponent implements OnInit, OnChanges{
     return item.nombre; 
   }
 
+  updateToNextPokemonOffset() {
+    this.pokemonListOffset += 20;
+    this.fetchData();
+  }
+
+  updateToPrevPokemonOffset() {
+    if (this.pokemonListOffset == 0) return;
+    this.pokemonListOffset -= 20;
+    this.fetchData();
+  }
+
   fetchData() {
-    this.#pokemonService.getPokemonFromTo(0, 20).subscribe(
+    this.#pokemonService.getPokemonFromTo(this.pokemonListOffset, 20).subscribe(
       (data) => {
-        console.log(data);
         this.pokemonList = (data as any).results;
         this.pokemonList = this.pokemonList.map((e) => {
           let pokemon: Pokemon = {
